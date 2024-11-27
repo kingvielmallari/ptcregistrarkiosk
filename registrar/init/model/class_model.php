@@ -64,38 +64,7 @@
 
 		  }
 
-		public function add_course($course_name, $course_decription){
-	       $stmt = $this->conn->prepare("INSERT INTO `tbl_course` (course_name, course_decription) VALUES(?, ?)") or die($this->conn->error);
-			$stmt->bind_param("ss", $course_name, $course_decription);
-			if($stmt->execute()){
-				$stmt->close();
-				$this->conn->close();
-				return true;
-			}
-		}
-
-
-		public function edit_course($course_name, $course_decription, $course_id){
-			$sql = "UPDATE `tbl_course` SET  `course_name` = ?, `course_decription` = ?  WHERE course_id = ?";
-			 $stmt = $this->conn->prepare($sql);
-			$stmt->bind_param("ssi", $course_name, $course_decription, $course_id);
-			if($stmt->execute()){
-				$stmt->close();
-				$this->conn->close();
-				return true;
-			}
-		}
-
-		public function delete_course($course_id){
-			$sql = "DELETE FROM tbl_course WHERE course_id = ?";
-			 $stmt = $this->conn->prepare($sql);
-			$stmt->bind_param("i", $course_id);
-			if($stmt->execute()){
-				$stmt->close();
-				$this->conn->close();
-				return true;
-			}
-		}
+	
 
 
 		public function add_student($IDnumber, $first_name, $middle_name, $last_name, $course, $year_level, $date_ofbirth, $gender, $complete_address, $email_address, $mobile_number, $username, $password, $status){

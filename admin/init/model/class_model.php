@@ -397,6 +397,17 @@
 			return $data;
 		}
 		
+		public function fetchAll_allstudent() { 
+			$sql = "SELECT * FROM tbl_student"; // Fetch all students
+			$stmt = $this->conn->prepare($sql); 
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$data = array();
+			while ($row = $result->fetch_assoc()) {
+				$data[] = $row;
+			}
+			return $data;
+		}
 
 		
 

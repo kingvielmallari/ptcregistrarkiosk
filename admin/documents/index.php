@@ -46,7 +46,7 @@
                             ?>
                             <?php foreach ($cstudent as $row): ?>
                             <div class="d-inline-block">
-                                <h5 class="text-muted"><b>Number of students</b></h5>
+                                <h5 class="text-muted"><b>Number of Students</b></h5>
                                 <h2 class="mb-0"><?= $row['count_students']; ?></h2>
                             </div>
                             <div class="float-right icon-circle-medium  icon-box-lg mt-1" style="background-color:#1269AF">
@@ -68,7 +68,7 @@
                             ?>
                             <?php foreach ($cstudent as $row): ?>
                             <div class="d-inline-block">
-                                <h5 class="text-muted"><b>Number of students</b></h5>
+                                <h5 class="text-muted"><b>Number of Registrar Staff</b></h5>
                                 <h2 class="mb-0"><?= $row['count_users']; ?></h2>
                             </div>
                             <div class="float-right icon-circle-medium  icon-box-lg mt-1" style="background-color:#1269AF">
@@ -76,7 +76,7 @@
                             </div>
                             <?php endforeach; ?>
                         </div>
-                        <a href="student.php" class="btn btn-primary" style="background-color:#1269AF">View Students</a>
+                        <a href="users.php" class="btn btn-primary" style="background-color:#1269AF">View Registrar Staff</a>
                     </div>
                 </div>
                           <!-- metric -->

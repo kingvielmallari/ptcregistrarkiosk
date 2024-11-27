@@ -17,7 +17,7 @@
                             </li>
 
                             <li class="nav-item ">
-                                <a class="nav-link" href="reports.php"><i class="fa fa-fw fa-file"></i>Generate Reports<span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="reports.php"><i class="fa fa-fw fa-chart-bar"></i>Generate Reports<span class="badge badge-success">6</span></a>
                             </li>
                         </ul>
                     </div>

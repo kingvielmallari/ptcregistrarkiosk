@@ -80,7 +80,7 @@
                                                         
                                                         <a href="edit-user.php?user=<?= $row['user_id']; ?>&full-name=<?php echo $row['complete_name']; ?>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                           <i class="fa fa-edit"></i>
-                                                        </a> |
+                                                        </a> 
                                                         <?php if ($row['status'] !== "Active" ) { ?>
                                                         <a href="javascript:;" data-id="<?= $row['user_id']; ?>" class="text-secondary font-weight-bold text-xs delete" data-toggle="tooltip" data-original-title="Edit user">
                                                           <i class="fa fa-trash-alt"></i>
