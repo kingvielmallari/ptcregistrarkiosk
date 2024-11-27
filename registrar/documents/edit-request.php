@@ -126,13 +126,14 @@
                                 <div class="form-group row">
                                     <label class="col-12 col-sm-3 col-form-label text-sm-right">Status</label>
                                     <div class="col-12 col-sm-8 col-lg-6">
-                                        <select data-parsley-type="alphanum" type="text" id="status" required="" placeholder="" class="form-control">        
-                                        <option value="Processing" style="background-color: orange;color: #fff">Processing</option>        
-                                            <option value="Declined" style="background-color: red;color: #fff">Declined</option>
-                                           
-                                            <option value="Releasing" style="background-color: green;color: #fff">Releasing</option>
-                                            <option value="Released" style="background-color: blue;color: #fff">Released</option>
-                                        </select>
+                                        
+                                        <select data-parsley-type="alphanum" type="text" id="status" required="" placeholder="" class="form-control">
+                                            <option value="Processing" <?php echo ($row['status'] == 'Processing') ? 'selected' : ''; ?> style="background-color: orange;color: #fff">Processing</option>
+                                            <option value="Declined" <?php echo ($row['status'] == 'Declined') ? 'selected' : ''; ?> style="background-color: red;color: #fff">Declined</option>
+                                            <option value="Releasing" <?php echo ($row['status'] == 'Releasing') ? 'selected' : ''; ?> style="background-color: green;color: #fff">Releasing</option>
+                                            <option value="Released" <?php echo ($row['status'] == 'Released') ? 'selected' : ''; ?> style="background-color: blue;color: #fff">Released</option>
+                                        </select>   
+                                    
                                     </div>
                                 </div>
                                 <div class="form-group row text-right">
