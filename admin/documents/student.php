@@ -1,4 +1,4 @@
-       <?php include('main_header/header.php');?>
+    <?php include('main_header/header.php');?>
         <!-- ============================================================== -->
         <!-- end navbar -->
         <!-- ============================================================== -->
@@ -14,41 +14,43 @@
         <!-- ============================================================== -->
         <div class="dashboard-wrapper">
             <div class="container-fluid  dashboard-content">
-                <!-- ============================================================== -->
-                <!-- pageheader -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-header">
-                             <h2 class="pageheader-title"><i class="fa fa-fw fa-user-graduate"></i> Student </h2>
-                            <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Student</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
+            <!-- ============================================================== -->
+            <!-- pageheader -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                     <h2 class="pageheader-title"><i class="fa fa-fw fa-user-graduate"></i> Student </h2>
+                    <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Student</li>
+                        </ol>
+                    </nav>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- end pageheader -->
-                <!-- ============================================================== -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end pageheader -->
+            <!-- ============================================================== -->
                
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <h5 class="card-header">Student Information</h5>
-                                <div class="card-body">
-                                     <div id="message"></div>
-                                    <div class="table-responsive">
-                                        <a href="add-student.php" class="btn btn-sm" style="background-color:#1269AF !important; color:white"><i class="fa fa-fw fa-user-plus"></i> Add  Student</a><br><br>
+                <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                    <h5 class="card-header">Student Information</h5>
+                    <div class="card-body">
+                         <div id="message"></div>
+                        <div class="table-responsive">
+                        <a href="add-student.php" class="btn btn-sm" style="background-color:#1269AF !important; color:white"><i class="fa fa-fw fa-user-plus"></i> Add  Student</a><br><br>
 
-                                        <a href="javascript:;" id="importExcel" class="btn btn-sm" style="background-color:#28a745 !important; color:white"><i class="fa fa-file-excel"></i> Import Excel</a><br><br>
-<form id="excelForm" enctype="multipart/form-data" style="display: none;">
-    <input type="file" name="excelFile" id="excelFile" accept=".xls,.xlsx" />
-</form>
+
+                        <form id="importForm" enctype="multipart/form-data">
+        <input type="file" name="excel_file" id="file" accept=".xls,.xlsx">
+        <button type="button" onclick="importExcel()" class="btn btn-sm" style="background-color:#1269AF !important; color:white">Import</button>
+        </form>
+<br>
 
 
                                         <table class="table table-striped table-bordered first">
@@ -166,38 +168,29 @@
     });
 </script>
 
-
+<!-- Add this JavaScript code before the closing </body> tag -->
 <script>
-    $(document).ready(function() {
-    $("#importExcel").click(function() {
-        $("#excelFile").click(); // Trigger the hidden file input
-    });
-
-    $("#excelFile").change(function() {
-        var formData = new FormData();
-        var file = $(this)[0].files[0];
-        formData.append("excelFile", file);
-
-        if (file) {
-            $.ajax({
-                url: "import_excel.php", // Your PHP backend script
-                method: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    $("#message").html(response); // Display success/error message
-                    location.reload(); // Reload the page to update the table
-                },
-                error: function(response) {
-                    console.log("Failed to upload Excel file.");
-                }
-            });
+function importExcel() {
+    var formData = new FormData(document.getElementById('importForm'));
+    
+    $.ajax({
+        url: '../../import.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $("#message").html(response);
+            // Reload the table to show new data
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            $("#message").html("Error: " + error);
         }
     });
-});
-
+}
 </script>
+
 
 </body>
  

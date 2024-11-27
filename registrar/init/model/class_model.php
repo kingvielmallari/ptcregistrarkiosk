@@ -25,7 +25,7 @@
 		}
 
 		public function login($username, $password, $status){
-			$stmt = $this->conn->prepare("SELECT * FROM `tbl_usermanagement` WHERE `username` = ? AND `password` = ? AND `status` = ?") or die($this->conn->error);
+			$stmt = $this->conn->prepare("SELECT * FROM `tbl_usermanagement` WHERE `username` = ? AND `password` = ? AND `status` = ? AND `desgination` = 'Registrar Staff'") or die($this->conn->error);
 			$stmt->bind_param("sss", $username, $password, $status);
 			if($stmt->execute()){
 				$result = $stmt->get_result();

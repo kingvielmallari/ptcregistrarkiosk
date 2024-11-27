@@ -24,19 +24,48 @@
 			}
 		}
 
-		public function login_student($username, $password, $status){
-			$stmt = $this->conn->prepare("SELECT * FROM `tbl_student` WHERE `username` = ? AND `password` = ? AND `account_status` = ?") or die($this->conn->error);
-			$stmt->bind_param("sss", $username, $password, $status);
-			if($stmt->execute()){
+		// public function login_student($username, $password, $status){
+		// 	$stmt = $this->conn->prepare("SELECT * FROM `tbl_student` WHERE `username` = ? AND `password` = ? AND `account_status` = ?") or die($this->conn->error);
+		// 	$stmt->bind_param("sss", $username, $password, $status);
+		// 	if($stmt->execute()){
+		// 		$result = $stmt->get_result();
+		// 		$valid = $result->num_rows;
+		// 		$fetch = $result->fetch_array();
+		// 		return array(
+		// 			'student_id'=> htmlentities($fetch['student_id']),
+		// 			'count'=>$valid
+		// 		);
+		// 	}
+		// }
+		public function login_student($username, $password, $status) {
+			$stmt = $this->conn->prepare("SELECT * FROM `tbl_student` WHERE `username` = ? AND `password` = ?") or die($this->conn->error);
+			$stmt->bind_param("ss", $username, $password);
+			
+			if ($stmt->execute()) {
 				$result = $stmt->get_result();
 				$valid = $result->num_rows;
 				$fetch = $result->fetch_array();
-				return array(
-					'student_id'=> htmlentities($fetch['student_id']),
-					'count'=>$valid
-				);
+		
+				if ($valid > 0) {
+					// Check if the account is inactive
+					if ($fetch['account_status'] == 'Inactive') {
+						return array(
+							'student_id' => htmlentities($fetch['student_id']),
+							'count' => $valid,
+							'status' => 'inactive' // Indicate that the account is inactive
+						);
+					} else {
+						return array(
+							'student_id' => htmlentities($fetch['student_id']),
+							'count' => $valid,
+							'status' => 'active' // Account is active
+						);
+					}
+				}
 			}
+			return array('count' => 0); // No matching student found
 		}
+		
  
 		public function student_account($student_id){
 			$stmt = $this->conn->prepare("SELECT * FROM `tbl_student` WHERE `student_id` = ?") or die($this->conn->error);

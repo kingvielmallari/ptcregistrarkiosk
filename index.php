@@ -140,7 +140,7 @@
     <script type="text/javascript">
       document.oncontextmenu = document.body.oncontextmenu = function() {return false;}//disable right click
     </script>
-     <script type="text/javascript">
+     <!-- <script type="text/javascript">
             jQuery(function(){
                 $('form[name="login_sform"]').on('submit', function(e){
                     e.preventDefault();
@@ -175,7 +175,51 @@
                     }
                 });
            });
-        </script>
+        </script> -->
+        <script type="text/javascript">
+    jQuery(function(){
+        $('form[name="login_sform"]').on('submit', function(e){
+            e.preventDefault();
+
+            var u_username = $(this).find('input[alt="username"]').val();
+            var p_password = $(this).find('input[alt="password"]').val();
+
+            if (u_username === '' && p_password === ''){
+                $('#alert-msg').html('<div class="alert alert-danger"> Required Username and Password!</div>');
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: 'init/controllers/login_process.php',
+                    data: {
+                        username: u_username,
+                        password: p_password
+                    },
+                    beforeSend:  function(){
+                        $('#alert-msg').html('');
+                    }
+                })
+                .done(function(response){
+                    if (response == 0){
+                        $('#alert-msg').html('<div class="alert alert-danger">Incorrect username or password!</div>');
+                    } else if (response == 'inactive') {
+                        // Redirect to change password page if the account is inactive
+                        $('#alert-msg').html('<div class="alert alert-warning">Your account is inactive. Please change your password.</div>');
+                        setTimeout(function() {
+                            window.location.href = "student/change_password.php";
+                        }, 2000); // Redirect after 2 seconds
+                    } else {
+                        // Account is active, proceed to student dashboard
+                        $("#btn-student").html('<img src="assets/images/loading.gif" /> &nbsp; Signing In ...');
+                        setTimeout(function() {
+                            window.location.href = "student/index.php";
+                        }, 2000); // Redirect after 2 seconds
+                    }
+                });
+            }
+        });
+    });
+</script>
+
         <script>
             function myFunction() {
               var x = document.getElementById("password");
