@@ -393,26 +393,26 @@ document.getElementById('printButton').addEventListener('click', function() {
 </body>
  
 </html>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // Get the select element
-    const documentSelect = document.getElementById('document_name');
+<!-- <script>
+// document.addEventListener('DOMContentLoaded', () => {
+//     // Get the select element
+//     const documentSelect = document.getElementById('document_name');
     
-    // Fetch existing requests
-    fetch('../init/controllers/get_pending_requests.php?student_id=<?= $_SESSION['student_id'] ?>')
-        .then(response => response.json())
-        .then(pendingRequests => {
-            // Get all options
-            const options = documentSelect.options;
+//     // Fetch existing requests
+//     fetch('../init/controllers/get_pending_requests.php?student_id=<?= $_SESSION['student_id'] ?>')
+//         .then(response => response.json())
+//         .then(pendingRequests => {
+//             // Get all options
+//             const options = documentSelect.options;
             
-            // Remove options that are already pending
-            for(let i = options.length-1; i >= 0; i--) {
-                const docName = options[i].value;
-                if(pendingRequests.includes(docName)) {
-                    options[i].remove();
-                }
+//             // Remove options that are already pending
+//             for(let i = options.length-1; i >= 0; i--) {
+//                 const docName = options[i].value;
+//                 if(pendingRequests.includes(docName)) {
+//                     options[i].remove();
+//                 }
                 
-            }
-        });
-});
-</script>
+//             }
+//         });
+// });
+// </script> -->

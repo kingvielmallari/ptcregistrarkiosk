@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $printer->text("THANK YOU FOR USING\n");
         $printer->text("PTC REGISTRAR KIOSK!\n");
         $printer->text("\n\n");
-	 $printer->text("\n\n");
+	    $printer->text("\n\n");
         $printer->cut();
     } catch (Exception $e) {
         error_log("Error printing: " . $e->getMessage());
