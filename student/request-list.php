@@ -42,12 +42,32 @@
                                                         <h5 class="card-header">Request Information</h5>
                                                         <div class="card-body">
                                                             <div id="message"></div>
+
+
                                                             <div class="table-responsive">
+                                                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                    <a href="add-request.php" class="btn btn-sm" style="background-color:#1269AF !important; color:white">
+                                                                        <i class="fa fa-fw fa-plus"></i> Add Request
+                                                                    </a>
+                                                                    <?php 
+                                                                    $student_id = $_SESSION['student_id'];
+                                                                    $conn = new class_model();
+                                                                    $docrequest = $conn->fetchAll_documentrequest($student_id);
+                                                                    
+                                                                    $active_requests = 0;
+                                                                    foreach ($docrequest as $request) {
+                                                                        if (in_array($request['status'], ['Received', 'Processing', 'Releasing'])) {
+                                                                            $active_requests++;
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    if ($active_requests >= 3) {
+                                                                        echo '<div class="alert alert-warning m-0 w-100" role="alert" style="color:#cc0000">You have 3 pending requests. Please wait for them to be completed before submitting new requests.</div>';                        echo '<script>document.querySelector("a[href=\'add-request.php\']").style.display = "none";</script>';
+                                                                    }
+                                                                    ?>
+                                                                </div>
 
-                                                                <a href="add-request.php" class="btn btn-sm" style="background-color:#1269AF !important; color:white"><i class="fa fa-fw fa-plus"></i> Add Request</a><br><br>
-                                                                
                                                                 <table class="table table-striped table-bordered first">
-
                                                                     <thead>
                                                                         <tr>
                                                                             <th scope="col">Queue No.</th>
@@ -61,13 +81,7 @@
                                                                             <th scope="col">Action</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                    <?php 
-                                                                        $student_id = $_SESSION['student_id'];
-                                                                        $conn = new class_model();
-                                                                        $docrequest = $conn->fetchAll_documentrequest($student_id);
-                                                                    ?>
-                                                                        <?php foreach ($docrequest as $row) {
+                                                                    <tbody>                        <?php foreach ($docrequest as $row) {
 
                                                                         ?>
                                                                         <tr>
@@ -126,6 +140,12 @@
                                                                             </a>
                                                                             </div>
                                                                         </div>
+
+
+
+
+
+                                                                        
                                                                         <?php } ?>
 
                                                                         <?php if ($row['status'] === "Declined" || $row['status'] === "Released") { ?>
